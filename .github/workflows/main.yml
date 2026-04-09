@@ -1,0 +1,47 @@
+# [Pipeline Scripts]
+name: CI QA Mentorship
+
+#triggers
+on:
+  workflow_dispatch: 
+
+# statements
+jobs:
+  tests:
+
+# SO Config
+    runs-on: ubuntu-latest
+
+# variables
+    env:
+      API_BASE_URL: 'http://localhost:3000'
+      PORT: 4000
+
+#steps
+    steps:
+
+      #  project
+      - name: Project Clone
+        uses: actions/checkout@v4
+        
+      #  depedenciespjt
+      - name: Installing project dependecies
+        run: npm install
+
+      #fe/be execution
+      - name: starting mock-server
+        run: npm run mock-server &
+
+      - name: starting application server
+        run: npm run server &
+
+      #executing tests
+      - name: executing test project
+        run: npx cypress run
+      
+      
+
+        
+        
+        
+      
